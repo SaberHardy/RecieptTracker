@@ -1,45 +1,20 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <title>Your Website</title>
-    
-</head>
-<body>
+{% extends 'trackApp/base.html' %}
 
-<header>
-    <h1>TrackTracer</h1>
-</header>
-
-<nav>
-    <div class="logo">
-        <img src="{% static 'imgs/trackerlogo.png' %}" alt="Logo" width="50" height="50">
+{% block content %}
+    <h2 class="text-center">These are all your receipts</h2>
+    <div class='row card-group'>
+        {% for recipe in all_recipes %}
+            <div class="col-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ recipe.name }}</h5>
+                        <p class="card-text">{{ recipe.price }}</p>
+                        <p class="card-text">{{ recipe.date_of_purchase }}</p>
+                        <a href="#" class="btn btn-primary">Check Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
     </div>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#contact">Contact</a>
-    <div class="login-logout">
-        <i class="fas fa-user"></i>
-        <a href="#login">Login</a>
-        <span>|</span>
-        <a href="#logout">Logout</a>
-    </div>
-</nav>
+{% endblock %}
 
-<section>
-    <!-- Your content goes here -->
-    <p>Welcome to your website!</p>
-</section>
-
-<footer>
-    &copy; 2023 All rights reserved.
-</footer>
-
-</body>
-</html>

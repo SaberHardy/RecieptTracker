@@ -1,9 +1,14 @@
 from django.shortcuts import render
+from trackApp.models import Recipe
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'trackApp/index.html')
+    all_recipes = Recipe.objects.all()
+    context = {
+        'all_recipes': all_recipes
+    }
+    return render(request, 'trackApp/index.html', context)
 
 
 def login(request):
