@@ -1,10 +1,45 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Your Website</title>
+    
 </head>
 <body>
-Hello from index page!!!
+
+<header>
+    <h1>TrackTracer</h1>
+</header>
+
+<nav>
+    <div class="logo">
+        <img src="{% static 'imgs/trackerlogo.png' %}" alt="Logo" width="50" height="50">
+    </div>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+    <div class="login-logout">
+        <i class="fas fa-user"></i>
+        <a href="#login">Login</a>
+        <span>|</span>
+        <a href="#logout">Logout</a>
+    </div>
+</nav>
+
+<section>
+    <!-- Your content goes here -->
+    <p>Welcome to your website!</p>
+</section>
+
+<footer>
+    &copy; 2023 Your Website. All rights reserved.
+</footer>
+
 </body>
 </html>
