@@ -1,14 +1,14 @@
 {% extends 'trackApp/base.html' %}
 
 {% block content %}
-    <h2 class="text-center">These are all your receipts</h2>
+    <h2 class="text-center my-3">These are all your receipts</h2>
     <div class='row card-group'>
         {% for recipe in all_recipes %}
             <div class="col-4">
                 <div class="card mb-4">
                     <div class="card-body">
                         <h5 class="card-title">{{ recipe.name }}</h5>
-                        <p class="card-text">{{ recipe.price }}</p>
+                        <p class="card-text">{{ recipe.price }}DA</p>
                         <p class="card-text">{{ recipe.date_of_purchase }}</p>
                         <a href="#" class="btn btn-primary">Check Details</a>
                     </div>
