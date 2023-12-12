@@ -1,0 +1,27 @@
+{% extends 'trackApp/base.html' %}
+
+{% block content %}
+    <h2 class="text-center my-3">Details Page</h2>
+    <div class="detail-div">
+
+        <div class='row card-group'>
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h1>{{ recipe.name|title }}</h1>
+                        {% for item in all_items %}
+                            <p>{{ item.name }} x {{ item.quantity }} =>  {{ item.price }}DA</p>
+                        {% endfor %}
+                        <p class="float-right">Date of Purchase: {{ recipe.date_of_purchase }}</p>
+                    <br>
+                    <br>
+                    <br>
+
+                        <p>Total Amount: {{ recipe.calculate_total_amount }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

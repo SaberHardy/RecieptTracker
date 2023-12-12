@@ -8,19 +8,23 @@ class ItemModel(models.Model):
     price = models.FloatField(null=False, blank=False)
     description = models.TextField()
 
+    def get_total_item_price(self):
+        return self.quantity * self.price
+
     def __str__(self):
         return self.name
 
 
 class Recipe(models.Model):
-    item = models.ForeignKey(ItemModel, on_delete=models.CASCADE, null=True)
+    items = models.ManyToManyField(ItemModel)
     name = models.CharField(max_length=100, null=False, blank=False)
     date_of_purchase = models.DateTimeField(default=timezone.now)
     price = models.DecimalField(max_digits=1000, decimal_places=2)
 
     def calculate_total_amount(self):
-        # Calculate the total amount based on the prices of items
-        total_amount = self.item.price * self.item.quantity
+        total_amount = 0
+        for order_item in self.items.all():
+            total_amount += order_item.get_total_item_price()
         return total_amount
 
     def __str__(self):

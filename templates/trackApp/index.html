@@ -7,10 +7,10 @@
             <div class="col-4">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h5 class="card-title">ID:  {{ recipe.id }}</h5>
-                        <h5 class="card-title">{{ recipe.name }}</h5>
+                        <h5 class="card-title">ID:  {{ recipe.id|upper }}</h5>
+                        <a href="{% url 'details' recipe.id %}"> <h5 class="card-title">{{ recipe.name|title }}</h5></a>
                         <p class="card-text">{{ recipe.price }}DA</p>
-                        <p class="card-text">{{ recipe.date_of_purchase }}</p>
+                        <p class="card-text float-right">{{ recipe.date_of_purchase }}</p>
                         <a href="#" class="btn btn-primary">Check Details</a>
                     </div>
                 </div>
