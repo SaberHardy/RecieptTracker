@@ -27,7 +27,12 @@
                         <p class="card-text">Total Amount: {{ recipe.calculate_total_amount }}DA</p>
                         <p class="card-text float-right">{{ recipe.date_of_purchase }}</p>
                         <a href="{% url 'details' recipe.id %}" class="btn btn-primary">Check Details</a>
-                        <a href="{% url 'delete_item' recipe.id %}" class="btn btn-danger">Delete</a>
+                    
+                        <a href="{% url 'update_receipt' recipe.id %}" class="btn btn-success">
+                            <i class="bi bi-pencil-square"></i></a>
+                    
+                        <a href="{% url 'delete_item' recipe.id %}" class="btn btn-danger">
+                            <i class="bi bi-trash-fill"></i></a>
                     </div>
                 </div>
             </div>

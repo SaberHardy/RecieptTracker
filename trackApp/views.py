@@ -75,3 +75,21 @@ def create_receipt(request):
     else:
         # Handle form errors gracefully (optional)
         return render(request, 'trackApp/create_receipt.html', {'form': form})
+
+
+def update_receipt(request, id):
+    context = {}
+
+    item_to_update = Recipe.objects.get(id=id)
+    form = RecipeForm(request.POST or None, instance=item_to_update)
+
+    if form.is_valid():
+        form.save()
+        return redirect("index")
+    else:
+        print("Form is not valid:", form.errors)
+
+    context['form'] = form
+    context['item_to_update'] = item_to_update
+    return render(request, "trackApp/update_item.html", context)
+
