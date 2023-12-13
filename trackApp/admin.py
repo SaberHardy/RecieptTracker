@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import Recipe, ItemModel
+from .models import Recipe
 
-# Register your models here.
-admin.site.register(Recipe)
-admin.site.register(ItemModel)
+
+@admin.register(Recipe)
+class RecipeAdmin(admin.ModelAdmin):
+    list_display = ("user", "store_name", "date_of_purchase")
+

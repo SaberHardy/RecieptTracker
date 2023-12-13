@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 
-from trackApp.models import Recipe, ItemModel
+from trackApp.models import Recipe
 
 
 # Create your views here.
@@ -22,9 +22,7 @@ def register(request):
 
 def details(request, id):
     recipe = get_object_or_404(Recipe, id=id)
-    all_items = ItemModel.objects.all()
     context = {
         'recipe': recipe,
-        'all_items': all_items
     }
     return render(request, 'trackApp/details.html', context)

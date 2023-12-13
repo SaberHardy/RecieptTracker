@@ -8,15 +8,15 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h1>{{ recipe.name|title }}</h1>
-                        {% for item in all_items %}
-                            <p>{{ item.name }} x {{ item.quantity }} =>  {{ item.price }}DA</p>
-                        {% endfor %}
+                        <h1>{{ recipe.store_name|title }}</h1>
+                            <p>{{ recipe.item }}:
+                                {{ recipe.quantity }} x {{ recipe.price }} =
+                                {% widthratio recipe.quantity 1 recipe.price %}DA</p>
+
                         <p class="float-right">Date of Purchase: {{ recipe.date_of_purchase }}</p>
                     <br>
                     <br>
                     <br>
-
                         <p>Total Amount: {{ recipe.calculate_total_amount }}</p>
                     </div>
                 </div>
