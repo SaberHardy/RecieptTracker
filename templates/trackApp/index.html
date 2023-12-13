@@ -7,7 +7,21 @@
             <div class="col-4">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h5 class="card-title">ID: {{ recipe.id|upper }}</h5>
+                        <h5 class="card-title">
+                            ID: {{ recipe.id|upper }}
+                            {% if recipe.status == 'Ordered' %}
+                                <span class="badge float-right bg-secondary">{{ recipe.status }}</span>
+                            {% elif recipe.status == 'Shipped' %}
+                                <span class="badge float-right bg-info">{{ recipe.status }}</span>
+                            {% elif recipe.status == 'Out' %}
+                                <span class="badge float-right bg-warning">{{ recipe.status }}</span>
+                            {% elif recipe.status == 'Arriving' %}
+                                <span class="badge float-right bg-primary">{{ recipe.status }}</span>
+                            {% elif recipe.status == 'Delivered' %}
+                                <span class="badge float-right bg-success">{{ recipe.status }}</span>
+
+                            {% endif %}
+                        </h5>
                         <a href="{% url 'details' recipe.id %}">
                             <h5 class="card-title">{{ recipe.store_name|title }}</h5>
                         </a>
