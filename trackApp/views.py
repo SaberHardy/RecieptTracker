@@ -1,5 +1,7 @@
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
 
 from trackApp.models import Recipe
 
@@ -49,3 +51,13 @@ def track_item(request):
     }
 
     return render(request, 'trackApp/track_item.html', context)
+
+
+def delete_item(request, id):
+    try:
+        item_to_delete = Recipe.objects.get(id=id)
+        item_to_delete.delete()
+        return HttpResponseRedirect(reverse('index'))
+    except Exception as e:
+        print("The item doesn't exists")
+        return HttpResponseRedirect(reverse('index'))
