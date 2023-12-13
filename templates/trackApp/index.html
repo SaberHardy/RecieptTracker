@@ -13,13 +13,12 @@
                                 <span class="badge float-right bg-secondary">{{ recipe.status }}</span>
                             {% elif recipe.status == 'Shipped' %}
                                 <span class="badge float-right bg-info">{{ recipe.status }}</span>
-                            {% elif recipe.status == 'Out' %}
+                            {% elif recipe.status == 'Out of Delivery' %}
                                 <span class="badge float-right bg-warning">{{ recipe.status }}</span>
                             {% elif recipe.status == 'Arriving' %}
                                 <span class="badge float-right bg-primary">{{ recipe.status }}</span>
                             {% elif recipe.status == 'Delivered' %}
                                 <span class="badge float-right bg-success">{{ recipe.status }}</span>
-
                             {% endif %}
                         </h5>
                         <a href="{% url 'details' recipe.id %}">
