@@ -1,0 +1,15 @@
+{% extends 'trackApp/base.html' %}
+
+{% block content %}
+    <h2 class="text-center my-3">Create Receipt</h2>
+    <div class='row card-group'>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+{% endblock %}
+

@@ -12,7 +12,7 @@ class Recipe(models.Model):
         ('Delivered', 'Delivered')
     )
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     store_name = models.CharField(max_length=255)
     date_of_purchase = models.DateField()
     # total_amount = models.DecimalField(max_digits=10, decimal_places=2)

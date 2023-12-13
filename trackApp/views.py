@@ -1,8 +1,10 @@
+from django import http
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
+from trackApp.forms import RecipeForm
 from trackApp.models import Recipe
 
 
@@ -61,3 +63,15 @@ def delete_item(request, id):
     except Exception as e:
         print("The item doesn't exists")
         return HttpResponseRedirect(reverse('index'))
+
+
+def create_receipt(request):
+    form = RecipeForm(request.POST or None)
+    if form.is_valid():
+        recipe = form.save()
+        # Optionally add success message to request context:
+        # request.session['success_message'] = "Recipe created successfully!"
+        return redirect('index')
+    else:
+        # Handle form errors gracefully (optional)
+        return render(request, 'trackApp/create_receipt.html', {'form': form})
