@@ -21,8 +21,13 @@ nav {
 nav a {
     float: left;
     color: #fff;
+    font-weight: bold;
     text-align: center;
-    padding: 14px 16px;
+    padding: 4px 10px;
+    text-decoration: none;
+}
+
+nav a:hover {
     text-decoration: none;
 }
 

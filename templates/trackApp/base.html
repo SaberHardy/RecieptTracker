@@ -17,9 +17,11 @@
 
 <nav>
     <div class="logo">
-        <img src="{% static 'imgs/trackerlogo.png' %}" alt="Logo" width="50" height="50">
+        <a href="{% url 'index' %}">        
+            <img src="{% static 'imgs/trackerlogo.png' %}" alt="Logo" width="50" height="50">
+        </a>
     </div>
-    <a href="#home">Home</a>
+    <a href="{% url 'index' %}">Home</a>
     <a href="#about">About</a>
     <a href="#services">Services</a>
     <a href="#contact">Contact</a>
