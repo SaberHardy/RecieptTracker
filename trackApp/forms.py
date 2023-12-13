@@ -10,4 +10,5 @@ class RecipeForm(forms.ModelForm):
         fields = ['store_name', 'date_of_purchase', 'item', 'quantity', 'price', 'status']
         widgets = {
             'date_of_purchase': DateInput(attrs={'type': 'date'}),
+            'status': forms.Select(attrs={'class': 'form-control'})
         }
