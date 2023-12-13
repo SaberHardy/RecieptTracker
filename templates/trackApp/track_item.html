@@ -1,0 +1,33 @@
+{% extends 'trackApp/base.html' %}
+
+{% block content %}
+    <div class="detail-div">
+
+        <div class='row card-group'>
+
+            {% if items_found %}
+                <h2 class="text-center my-3">Track Your Item</h2>
+
+                {% for ele in items_found %}
+
+                    <div class="col-12">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">ID: {{ ele.id|upper }}</h5>
+                                <a href="{% url 'details' ele.id %}">
+                                    <h5 class="card-title">{{ ele.store_name|title }}</h5>
+                                </a>
+                                <p class="card-text">Total Amount: {{ ele.calculate_total_amount }}DA</p>
+                                <p class="card-text float-right">{{ ele.date_of_purchase }}</p>
+                                <a href="{% url 'details' ele.id %}" class="btn btn-primary">Check Details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h2 class="text-center my-3">Sorry, we couldn't find any element!</h2>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+

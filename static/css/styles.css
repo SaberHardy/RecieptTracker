@@ -17,7 +17,9 @@ nav {
     padding: 10px;
     overflow: hidden;
 }
+.nav-link {
 
+}
 nav a {
     float: left;
     color: #fff;
