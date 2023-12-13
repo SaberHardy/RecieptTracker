@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, DetailView, DeleteView
+from django.views.generic import ListView, DetailView, DeleteView, CreateView
 
 from trackApp.forms import RecipeForm
 from trackApp.models import Recipe
@@ -98,17 +98,24 @@ class DeleteReceiptView(DeleteView):
     success_url = reverse_lazy('index')
 
 
-@login_required
-def create_receipt(request):
-    form = RecipeForm(request.POST or None)
-    if form.is_valid():
-        recipe = form.save()
-        # Optionally add success message to request context:
-        # request.session['success_message'] = "Recipe created successfully!"
-        return redirect('index')
-    else:
-        # Handle form errors gracefully (optional)
-        return render(request, 'trackApp/create_receipt.html', {'form': form})
+# @login_required
+# def create_receipt(request):
+#     form = RecipeForm(request.POST or None)
+#     if form.is_valid():
+#         recipe = form.save()
+#         # Optionally add success message to request context:
+#         # request.session['success_message'] = "Recipe created successfully!"
+#         return redirect('index')
+#     else:
+#         # Handle form errors gracefully (optional)
+#         return render(request, 'trackApp/create_receipt.html', {'form': form})
+
+class CreateReceiptView(CreateView):
+    model = Recipe
+    form_class = RecipeForm
+    template_name = 'trackApp/create_receipt.html'
+    success_url = reverse_lazy('index')
+    # fields = ['store_name', 'date_of_purchase', 'item', 'price', 'quantity', 'status']
 
 
 @login_required
