@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 
@@ -23,6 +24,10 @@ class Recipe(models.Model):
 
     def calculate_total_amount(self):
         return self.quantity * self.price
+
+    def get_absolute_url(self):
+        # return reverse('article-detail', args=(str(self.id)))
+        return reverse('index')
 
     def __str__(self):
         return f"{self.store_name} - {self.date_of_purchase}"

@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, DetailView, DeleteView, CreateView
+from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
 
 from trackApp.forms import RecipeForm
 from trackApp.models import Recipe
@@ -118,19 +118,25 @@ class CreateReceiptView(CreateView):
     # fields = ['store_name', 'date_of_purchase', 'item', 'price', 'quantity', 'status']
 
 
-@login_required
-def update_receipt(request, id):
-    context = {}
+# @login_required
+# def update_receipt(request, id):
+#     context = {}
+#
+#     item_to_update = Recipe.objects.get(id=id)
+#     form = RecipeForm(request.POST or None, instance=item_to_update)
+#
+#     if form.is_valid():
+#         form.save()
+#         return redirect("index")
+#     else:
+#         print("Form is not valid:", form.errors)
+#
+#     context['form'] = form
+#     context['item_to_update'] = item_to_update
+#     return render(request, "trackApp/update_item.html", context)
 
-    item_to_update = Recipe.objects.get(id=id)
-    form = RecipeForm(request.POST or None, instance=item_to_update)
-
-    if form.is_valid():
-        form.save()
-        return redirect("index")
-    else:
-        print("Form is not valid:", form.errors)
-
-    context['form'] = form
-    context['item_to_update'] = item_to_update
-    return render(request, "trackApp/update_item.html", context)
+class UpdateReceiptView(UpdateView):
+    model = Recipe
+    form_class = RecipeForm
+    template_name = 'trackApp/update_item.html'
+    # success_url = reverse_lazy('index')

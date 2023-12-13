@@ -5,15 +5,12 @@
     <h2 class="text-center my-3">Update {{ item_to_update.store_name }}</h2>
     <div class="container">
         <div class="col justify-content-center">
-            <form method="post" enctype="multipart/form-data" 
-                  action="{% url 'update_receipt' item_to_update.id %}"
+            <form method="post" enctype="multipart/form-data"
                   class="uniForm col-md-12">
                 {% csrf_token %}
-
                 <div class="form-fields">
                     {{ form|crispy }}
                 </div>
-
                 <input type="submit" class="btn btn-primary text-center" value="Update">
             </form>
         </div>

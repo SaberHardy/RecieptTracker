@@ -19,5 +19,6 @@ urlpatterns = [
     # path('create_receipt/', views.create_receipt, name='create_receipt'),
     path('create_receipt/', views.CreateReceiptView.as_view(), name='create_receipt'),
 
-    path('update_receipt/<int:id>/', views.update_receipt, name='update_receipt'),
+    # path('update_receipt/<int:id>/', views.update_receipt, name='update_receipt'),
+    path('update_receipt/<int:pk>/', views.UpdateReceiptView.as_view(), name='update_receipt'),
 ]
