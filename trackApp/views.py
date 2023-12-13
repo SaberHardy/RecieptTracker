@@ -4,7 +4,7 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from trackApp.forms import RecipeForm
 from trackApp.models import Recipe
@@ -42,13 +42,22 @@ def register(request):
     return render(request, 'trackApp/register.html')
 
 
-@login_required
-def details(request, id):
-    recipe = get_object_or_404(Recipe, id=id)
-    context = {
-        'recipe': recipe,
-    }
-    return render(request, 'trackApp/details.html', context)
+# @login_required
+# def details(request, id):
+#     recipe = get_object_or_404(Recipe, id=id)
+#     context = {
+#         'recipe': recipe,
+#     }
+#     return render(request, 'trackApp/details.html', context)
+
+class ReceiptDetail(DetailView):
+    model = Recipe
+    template_name = 'trackApp/details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # recipe = get_object_or_404(Recipe, pk=self)
+        return context
 
 
 @login_required
