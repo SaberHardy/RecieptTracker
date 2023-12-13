@@ -4,18 +4,34 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
+from django.views.generic import ListView
 
 from trackApp.forms import RecipeForm
 from trackApp.models import Recipe
 
 
+# TODO: add logger and alerts,
+# TODO: ListView, DetailView, DeleteView, UpdateView
+# TODO: FormView
+
 # Create your views here.
-def index(request):
-    all_recipes = Recipe.objects.all()
-    context = {
-        'all_recipes': all_recipes
-    }
-    return render(request, 'trackApp/index.html', context)
+# def index(request):
+#     all_recipes = Recipe.objects.all()
+#     context = {
+#         'all_recipes': all_recipes
+#     }
+#     return render(request, 'trackApp/index.html', context)
+
+class ListItems(ListView):
+    model = Recipe
+    template_name = 'trackApp/index.html'
+    ordering = '-date_of_purchase'
+
+    def get_context_data(self, *args, object_list=None, **kwargs):
+        all_recipes = Recipe.objects.all()
+        context = super(ListItems, self).get_context_data(*args, **kwargs)
+        context['all_recipes'] = all_recipes
+        return context
 
 
 def login(request):
@@ -43,7 +59,6 @@ def track_item(request):
     if search_item != "":
         items_found = Recipe.objects.filter(Q(id__icontains=search_item))
         if items_found.exists():
-            # TODO: add logger and alerts
             print("Item exists in the database!")
         else:
             print("Item doesn't exist in the database.")
