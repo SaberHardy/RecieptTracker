@@ -1,4 +1,5 @@
 from django import http
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
@@ -25,6 +26,7 @@ def register(request):
     return render(request, 'trackApp/register.html')
 
 
+@login_required
 def details(request, id):
     recipe = get_object_or_404(Recipe, id=id)
     context = {
@@ -33,6 +35,7 @@ def details(request, id):
     return render(request, 'trackApp/details.html', context)
 
 
+@login_required
 def track_item(request):
     search_item = request.GET.get('search')
     items_found = None
@@ -55,6 +58,7 @@ def track_item(request):
     return render(request, 'trackApp/track_item.html', context)
 
 
+@login_required
 def delete_item(request, id):
     try:
         item_to_delete = Recipe.objects.get(id=id)
@@ -65,6 +69,7 @@ def delete_item(request, id):
         return HttpResponseRedirect(reverse('index'))
 
 
+@login_required
 def create_receipt(request):
     form = RecipeForm(request.POST or None)
     if form.is_valid():
@@ -77,6 +82,7 @@ def create_receipt(request):
         return render(request, 'trackApp/create_receipt.html', {'form': form})
 
 
+@login_required
 def update_receipt(request, id):
     context = {}
 
@@ -92,4 +98,3 @@ def update_receipt(request, id):
     context['form'] = form
     context['item_to_update'] = item_to_update
     return render(request, "trackApp/update_item.html", context)
-
