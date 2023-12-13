@@ -1,15 +1,18 @@
 {% extends 'trackApp/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-    <h2 class="text-center my-3">Create Receipt</h2>
-    <div class='row card-group'>
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
+    <h2 class="text-center my-3">Create Recipe</h2>
+    <div class="container">
+        <div class="col justify-content-center">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
 
-            {{ form.as_p }}
+                {{ form|crispy }}
 
-            <input type="submit" value="Submit">
-        </form>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
     </div>
 {% endblock %}
 

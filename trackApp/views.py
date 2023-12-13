@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
-from django.views.generic import ListView, DetailView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, DetailView, DeleteView
 
 from trackApp.forms import RecipeForm
 from trackApp.models import Recipe
@@ -82,15 +82,20 @@ def track_item(request):
     return render(request, 'trackApp/track_item.html', context)
 
 
-@login_required
-def delete_item(request, id):
-    try:
-        item_to_delete = Recipe.objects.get(id=id)
-        item_to_delete.delete()
-        return HttpResponseRedirect(reverse('index'))
-    except Exception as e:
-        print("The item doesn't exists")
-        return HttpResponseRedirect(reverse('index'))
+# @login_required
+# def delete_item(request, id):
+#     try:
+#         item_to_delete = Recipe.objects.get(id=id)
+#         item_to_delete.delete()
+#         return HttpResponseRedirect(reverse('index'))
+#     except Exception as e:
+#         print("The item doesn't exists")
+#         return HttpResponseRedirect(reverse('index'))
+
+class DeleteReceiptView(DeleteView):
+    model = Recipe
+    template_name = 'trackApp/delete_receipt.html'
+    success_url = reverse_lazy('index')
 
 
 @login_required
