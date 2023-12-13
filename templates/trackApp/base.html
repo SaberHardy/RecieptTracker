@@ -36,22 +36,29 @@
             <li class="nav-item">
                 <a class="nav-link" href="#contact">Contact</a>
             </li>
-             <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link" href="{% url 'create_receipt' %}">Create Receipt</a>
             </li>
         </ul>
 
         <form class="form-inline my-2 my-lg-0 ml-auto" method="get" action="{% url 'track_item' %}">
             <input class="form-control my-2 mr-sm-2" type="number" name="search" placeholder="Search receipts"
-                   aria-label="Search" min="0" step="1" required >
+                   aria-label="Search" min="0" step="1" required>
             <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
         </form>
 
         <div class="login-logout">
-            <i class="fas fa-user"></i>
-            <a href="{% url 'login' %}" class="nav-link">Login</a>
-            <span class="nav-link">|</span>
-            <a href="{% url 'register' %}" class="nav-link">Register</a>
+            {% if user.is_authenticated %}
+                <i class="fas fa-user"></i>
+                <a href="{% url 'login' %}" class="nav-link">Logout</a>
+                <span class="nav-link">|</span>
+                <a href="" class="nav-link">{{ user.username }}</a>
+            {% else %}
+                <i class="fas fa-user"></i>
+                <a href="{% url 'login' %}" class="nav-link">login</a>
+                <span class="nav-link">|</span>
+                <a href="{% url 'register' %}" class="nav-link">Register</a>
+            {% endif %}
         </div>
     </div>
 </nav>
