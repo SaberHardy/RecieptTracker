@@ -9,8 +9,10 @@ class RegisterUserForm(UserCreationForm):
             attrs={'class': 'form-control',
                    'placeholder': 'Type your email here'}))
 
-    password1 = forms.CharField(max_length=20, widget=forms.PasswordInput())
-    password2 = forms.CharField(max_length=20, widget=forms.PasswordInput())
+    password1 = forms.CharField(max_length=20,
+                                widget=forms.PasswordInput(attrs={'placeholder': 'Type your password'}))
+    password2 = forms.CharField(max_length=20,
+                                widget=forms.PasswordInput(attrs={'placeholder': 'confirmation password'}))
 
     class Meta:
         model = User
