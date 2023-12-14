@@ -1,49 +1,51 @@
 {% extends 'trackApp/base.html' %}
 
-{% block content %}    
+{% block content %}
     <h2 class="text-center my-3">These are all your receipts</h2>
-    <div class='row card-group'>
+    <div class='row card-group mb-5 mx-5'>
         {% for recipe in all_recipes %}
             <div class="col-4">
                 <div class="card mb-4">
                     <div class="card-body">
                         <h5 class="card-title">
                             ID: {{ recipe.id|upper }}
-                        {% if user.is_authenticated %}
-                            {% if recipe.status == 'Ordered' %}
-                                <span class="badge float-right bg-secondary">{{ recipe.status }}</span>
-                            {% elif recipe.status == 'Shipped' %}
-                                <span class="badge float-right bg-info">{{ recipe.status }}</span>
-                            {% elif recipe.status == 'Out of Delivery' %}
-                                <span class="badge float-right bg-warning">{{ recipe.status }}</span>
-                            {% elif recipe.status == 'Arriving' %}
-                                <span class="badge float-right bg-primary">{{ recipe.status }}</span>
-                            {% elif recipe.status == 'Delivered' %}
-                                <span class="badge float-right bg-success">{{ recipe.status }}</span>
+                            {% if user.is_authenticated %}
+                                {% if recipe.status == 'Ordered' %}
+                                    <span class="badge float-right bg-secondary">{{ recipe.status }}</span>
+                                {% elif recipe.status == 'Shipped' %}
+                                    <span class="badge float-right bg-info">{{ recipe.status }}</span>
+                                {% elif recipe.status == 'Out of Delivery' %}
+                                    <span class="badge float-right bg-warning">{{ recipe.status }}</span>
+                                {% elif recipe.status == 'Arriving' %}
+                                    <span class="badge float-right bg-primary">{{ recipe.status }}</span>
+                                {% elif recipe.status == 'Delivered' %}
+                                    <span class="badge float-right bg-success">{{ recipe.status }}</span>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
                         </h5>
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'details' recipe.pk %}">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'details' recipe.pk %}">
+                                <h5 class="card-title">Store Name: {{ recipe.store_name|title }}</h5>
+                            </a>
+
+                            <p class="card-text">Total Amount: {{ recipe.calculate_total_amount }}DA</p>
+                            <div class="float-right">
+                                <p class="card-text">{{ recipe.date_of_purchase }}</p>
+                                <p class="card-text float-right">Created By: {{ recipe.user.username }}</p>
+
+                            </div>
+                            <a href="{% url 'details' recipe.id %}" class="btn btn-primary">Check Details</a>
+                            {% if user.is_authenticated %}
+                                {% if user.id == recipe.user.id %}
+                                    <a href="{% url 'update_receipt' recipe.pk %}" class="btn btn-success">
+                                        <i class="bi bi-pencil-square"></i></a>
+                                    <a href="{% url 'delete_item' recipe.id %}" class="btn btn-danger">
+                                        <i class="bi bi-trash-fill"></i></a>
+                                {% endif %}
+                            {% endif %}
+                        {% else %}
                             <h5 class="card-title">Store Name: {{ recipe.store_name|title }}</h5>
-                        </a>
-
-                        <p class="card-text">Total Amount: {{ recipe.calculate_total_amount }}DA</p>
-                        <div class="float-right">
-                        <p class="card-text">{{ recipe.date_of_purchase }}</p>
-                        <p class="card-text float-right">Created By: {{ recipe.user.id }}</p>
-
-                        </div>
-                        <a href="{% url 'details' recipe.id %}" class="btn btn-primary">Check Details</a>
-
-                        <a href="{% url 'update_receipt' recipe.pk %}" class="btn btn-success">
-                            <i class="bi bi-pencil-square"></i></a>
-
-                        <a href="{% url 'delete_item' recipe.id %}" class="btn btn-danger">
-                            <i class="bi bi-trash-fill"></i></a>
-                    {% else %}
-                            <h5 class="card-title">Store Name: {{ recipe.store_name|title }}</h5>
-                    {% endif %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
