@@ -2,6 +2,9 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class Recipe(models.Model):
@@ -28,6 +31,14 @@ class Recipe(models.Model):
     def get_absolute_url(self):
         # return reverse('article-detail', args=(str(self.id)))
         return reverse('index')
+
+    def save(self, *args, **kwargs):
+        logger.info("Saving Recipe instance with ID %s", self.id)
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        logger.info("Deleting Recipe instance with ID %s", self.id)
+        super().delete(*args, **kwargs)
 
     def __str__(self):
         return f"{self.store_name} - {self.date_of_purchase}"

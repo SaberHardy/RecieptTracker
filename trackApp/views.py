@@ -8,6 +8,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .models import Recipe
 from .forms import RecipeForm
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 # TODO: add logger and alerts,
@@ -28,6 +31,7 @@ class ListItems(ListView):
         all_recipes = Recipe.objects.all()
         context = super(ListItems, self).get_context_data(*args, **kwargs)
         context['all_recipes'] = all_recipes
+        logger.info("Viewing all the data with List view Class Based View")
         return context
 
 
@@ -57,11 +61,11 @@ def track_item(request):
     if search_item != "":
         items_found = Recipe.objects.filter(Q(id__icontains=search_item))
         if items_found.exists():
-            print("Item exists in the database!")
+            logger.info("Item exists in the database!")
         else:
-            print("Item doesn't exist in the database.")
+            logger.warning("Item doesn't exist in the database.")
     else:
-        print("No search item provided")
+        logger.warning("No search item provided")
 
     # recipe = get_object_or_404(Recipe, id=id)
     context = {
@@ -110,6 +114,8 @@ class CreateReceiptView(LoginRequiredMixin, CreateView):
         # Associate the user with the receipt before saving
         form.instance.user = self.request.user  # Set the user to the currently logged-in user
         messages.success(self.request, 'Receipt created successfully.')
+        logger.info("Receipt created successfully!")
+
         return super().form_valid(form)
 
 
@@ -142,6 +148,8 @@ class UpdateReceiptView(UpdateView):
         # Check if the logged-in user is the owner of the receipt
         if self.request.user != obj.user:
             # You may want to raise a PermissionDenied or redirect to a permission denied page
+            logger.info("Permission denied, you are not allowed to update this!")
+
             raise PermissionDenied("You do not have permission to update this receipt.")
 
         return obj
@@ -150,7 +158,8 @@ class UpdateReceiptView(UpdateView):
         # Ensure the logged-in user is the owner of the receipt being updated
         if self.request.user != self.get_object().user:
             # You may want to raise a PermissionDenied or redirect to a permission denied page
+            logger.info("Permission denied, you are not allowed to validate the update!")
+
             raise PermissionDenied("You do not have permission to update this receipt.")
 
         return super().form_valid(form)
-    # success_url = reverse_lazy('index')

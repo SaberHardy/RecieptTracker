@@ -4,6 +4,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
 from members.forms import RegisterUserForm
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def login_user(request):
@@ -18,7 +21,7 @@ def login_user(request):
             messages.success(request, 'You are now logged in as %s' % username)
             return redirect('index')
         else:
-            print("Invalid username or password")
+            logger.info("Invalid username or password")
             messages.error(request, 'Invalid username or password')
             return redirect('login')
     print("Redirected to login again!!")
@@ -36,7 +39,8 @@ def register_user(request):
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, f"You are now logged in as {user.username}")
-            print(f"User ID: {user.id}, Username: {user.username}")
+
+            logger.info(f"User ID: {user.id}, Username: {user.username}")
 
             return redirect("index")
         # else:
@@ -51,4 +55,5 @@ def register_user(request):
 
 def logout_user(request):
     logout(request)
+    logger.info("User Logged out successfully")
     return redirect('index')

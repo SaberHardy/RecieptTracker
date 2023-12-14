@@ -1,0 +1,16 @@
+Saving Recipe instance with ID 3
+Saving Recipe instance with ID 3
+Viewing all the data with List view Class Based View
+Viewing all the data with List view Class Based View
+"GET / HTTP/1.1" 200 17147
+"GET / HTTP/1.1" 200 17147
+"GET /delete_item/3/ HTTP/1.1" 200 4090
+"GET /delete_item/3/ HTTP/1.1" 200 4090
+Deleting Recipe instance with ID 3
+Deleting Recipe instance with ID 3
+"POST /delete_item/3/ HTTP/1.1" 302 0
+"POST /delete_item/3/ HTTP/1.1" 302 0
+Viewing all the data with List view Class Based View
+Viewing all the data with List view Class Based View
+"GET / HTTP/1.1" 200 15522
+"GET / HTTP/1.1" 200 15522
