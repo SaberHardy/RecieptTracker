@@ -38,7 +38,7 @@ class Recipe(models.Model):
 
     def delete(self, *args, **kwargs):
         logger.info("Deleting Recipe instance with ID %s", self.id)
-        super().delete(*args, **kwargs)
+        # super().delete(*args, **kwargs)
 
     def __str__(self):
         return f"{self.store_name} - {self.date_of_purchase}"

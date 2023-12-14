@@ -121,6 +121,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 LOGIN_URL = 'index'
 LOGIN_REDIRECT_URL = 'index'
 LOGOUT_REDIRECT_URL = 'index'
+REGISTER_REDIRECT_URL = 'index'
 
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-secondary',
