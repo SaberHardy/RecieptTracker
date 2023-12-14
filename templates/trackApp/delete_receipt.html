@@ -1,21 +1,27 @@
 {% extends 'trackApp/base.html' %}
 
 {% block content %}
-    <h2 class="text-center my-3">{{ recipe.store_name|title }} Details</h2>
-    <div class="detail-div">
-        <div class='row card-group'>
-            <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h1>{{ recipe.store_name|title }}</h1>
-                        <form method="post">{% csrf_token %}
-                            <p>Are you sure you want to delete "{{ object }}"?</p>
-                            {{ form }}
-                            <input type="submit" value="Confirm">
-                        </form>
+    {% if user.is_authenticated %}
+        {% if user.id == recipe.user.id %}
+            <h2 class="text-center my-3">{{ recipe.store_name|title }} Deletion</h2>
+            <div class="detail-div">
+                <div class='row card-group'>
+                    <div class="col-12">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h1>{{ recipe.store_name|title }}</h1>
+                                <form method="post">{% csrf_token %}
+                                    <p>Are you sure you want to delete "{{ object }}"?</p>
+                                    {{ form }}
+                                    <input type="submit" value="Confirm">
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        {% else %}
+            <h2 class="danger">You are not allowed to be here!</h2>
+        {% endif %}
+    {% endif %}
 {% endblock %}

@@ -1,12 +1,9 @@
 {% extends 'trackApp/base.html' %}
 
 {% block content %}
-    <p>Current user is: {{ user.username }}</p>
-    <p>Receipt user is: {{ recipe.user.id }}</p>
 
     <h2 class="text-center my-3">{{ recipe.store_name|title }} Details</h2>
     <div class="detail-div">
-
         <div class='row card-group'>
             <div class="col-12">
                 <div class="card mb-4">

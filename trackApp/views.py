@@ -1,21 +1,17 @@
-from django import http
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse, reverse_lazy
+from django.shortcuts import render
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
-
-from trackApp.forms import RecipeForm
-from trackApp.models import Recipe
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from .models import Recipe
+from .forms import RecipeForm
 
 
 # TODO: add logger and alerts,
-# TODO: ListView, DetailView, DeleteView, UpdateView
-# TODO: FormView
 
-# Create your views here.
 # def index(request):
 #     all_recipes = Recipe.objects.all()
 #     context = {
@@ -102,13 +98,6 @@ class DeleteReceiptView(DeleteView):
 #     else:
 #         # Handle form errors gracefully (optional)
 #         return render(request, 'trackApp/create_receipt.html', {'form': form})
-
-from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
-from .models import Recipe
-from .forms import RecipeForm
 
 
 class CreateReceiptView(LoginRequiredMixin, CreateView):
