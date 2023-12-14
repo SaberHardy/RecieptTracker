@@ -1,11 +1,14 @@
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic.edit import DeleteView
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from .models import Recipe
 from .forms import RecipeForm
 import logging
@@ -85,11 +88,16 @@ def track_item(request):
 #         print("The item doesn't exists")
 #         return HttpResponseRedirect(reverse('index'))
 
+
 class DeleteReceiptView(DeleteView):
     model = Recipe
     template_name = 'trackApp/delete_receipt.html'
     success_url = reverse_lazy('index')
-
+    #
+    def delete(self, request, *args, **kwargs):
+        print("Delete method called")
+        return super().delete(request, *args, **kwargs)
+#
 
 # @login_required
 # def create_receipt(request):

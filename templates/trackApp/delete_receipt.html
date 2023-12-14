@@ -10,10 +10,14 @@
                         <div class="card mb-4">
                             <div class="card-body">
                                 <h1>{{ recipe.store_name|title }}</h1>
-                                <form method="post">{% csrf_token %}
+                                <form method="post" action="{% url 'delete_item' pk=recipe.pk %}">
+                                    {% csrf_token %}
                                     <p>Are you sure you want to delete "{{ object }}"?</p>
                                     {{ form }}
                                     <input type="submit" value="Confirm">
+                                    <a class="btn btn-outline" href="{% url 'index' %}" type="submit">
+                                         Cancel
+                                    </a>
                                 </form>
                             </div>
                         </div>

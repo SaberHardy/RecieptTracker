@@ -134,40 +134,40 @@ from .filters import ExcludePatternFilter
 
 LOGGING_DIR = os.path.join(BASE_DIR, 'logs')
 
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
-        'exclude_patterns': {
-            '()': ExcludePatternFilter,
-            'patterns': ['/details/', '/update_receipt/'],
-        },
-    },
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(LOGGING_DIR, 'loggers_file.log'),
-            'filters': ['exclude_patterns'],
-        },
-    },
-    'root': {
-        'handlers': ['file'],
-        'level': 'INFO',
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'INFO',
-        },
-        'trackApp': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-        },
-        'members': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-        },
-    },
-}
+#
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'filters': {
+#         'exclude_patterns': {
+#             '()': ExcludePatternFilter,
+#             'patterns': ['/details/', '/update_receipt/'],
+#         },
+#     },
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': os.path.join(LOGGING_DIR, 'loggers_file.log'),
+#             'filters': ['exclude_patterns'],
+#         },
+#     },
+#     'root': {
+#         'handlers': ['file'],
+#         'level': 'INFO',
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['file'],
+#             'level': 'INFO',
+#         },
+#         'trackApp': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#         },
+#         'members': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#         },
+#     },
+# }

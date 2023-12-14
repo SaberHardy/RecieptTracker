@@ -40,8 +40,6 @@ from django.contrib.auth.models import User
 #         self.assertTemplateUsed(response, 'trackApp/index.html')
 
 
-
-
 class RecipeModelTestCase(TestCase):
     def setUp(self):
         # Create a test user for the Recipe model
@@ -97,4 +95,3 @@ class RecipeModelTestCase(TestCase):
         # Test __str__ method
         expected_str = f"Test Store - 2023-01-01"
         self.assertEqual(str(recipe), expected_str)
-

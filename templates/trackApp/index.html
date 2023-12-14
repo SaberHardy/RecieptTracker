@@ -39,7 +39,7 @@
                                 {% if user.id == recipe.user.id %}
                                     <a href="{% url 'update_receipt' recipe.pk %}" class="btn btn-success">
                                         <i class="bi bi-pencil-square"></i></a>
-                                    <a href="{% url 'delete_item' recipe.id %}" class="btn btn-danger">
+                                    <a href="{% url 'delete_item' pk=recipe.id %}" class="btn btn-danger">
                                         <i class="bi bi-trash-fill"></i></a>
                                 {% endif %}
                             {% endif %}
