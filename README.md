@@ -25,3 +25,13 @@ E. Testing:
 > ### <p align="center">Installation</p>
 > 
 * To make this application work follow these steps:
+
+1. Download the project form github repo:
+   * https://github.com/SaberHardy/RecieptTracker
+2. cd open the terminal where it downloaded:
+  - cd RecieptTracker
+3. create the virtual environment
+   * python -m venv venv
+4. activate the venv
+   * .\venv\Scripts\activate
+5. 
