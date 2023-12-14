@@ -1,7 +1,9 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+
+from members.forms import RegisterUserForm
 
 
 def login_user(request):
@@ -25,14 +27,25 @@ def login_user(request):
 
 def register_user(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password1 = request.POST['password1']
-        password2 = request.POST['password2']
-        email = request.POST['email']
-        user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
-        user.save()
+        form = RegisterUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
 
-    return render(request, 'registration/register.html')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            messages.success(request, f"You are now logged in as {user.username}")
+
+            return redirect("index")
+        # else:
+        #     # Handle authentication failure
+        # messages.error(request, 'Authentication failed. Please try logging in.')
+    else:
+        form = RegisterUserForm()
+
+    context = {'form': form}
+    return render(request, 'registration/register.html', context)
 
 
 def logout_user(request):

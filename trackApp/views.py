@@ -34,14 +34,6 @@ class ListItems(ListView):
         return context
 
 
-def login(request):
-    return render(request, 'trackApp/../templates/registration/registration/login.html')
-
-
-def register(request):
-    return render(request, 'trackApp/../templates/registration/registration/register.html')
-
-
 # @login_required
 # def details(request, id):
 #     recipe = get_object_or_404(Recipe, id=id)

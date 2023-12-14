@@ -1,38 +1,21 @@
+{% extends 'trackApp/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% block content %}
+    <div class="container">
+        <h2>Register</h2>
+        <form action="{% url 'register_user' %}" method="post">
+            {% csrf_token %}
 
-    <title>Register</title>
-</head>
-<body>
+            {{ form|crispy }}
 
-<div class="container">
-    <h2>Register</h2>
-    <form id="loginForm">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" placeholder="Username" required>
+            <button type="submit">Register</button>
+        </form>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Email" required>
-
-        <label for="password1">Password</label>
-        <input type="password" id="password1" name="password1" placeholder="Password" required>
-
-        <label for="password2">Confirm Password</label>
-        <input type="password" id="password2" name="password2" placeholder="Password" required>
-
-        <button type="submit">Register</button>
-    </form>
-
-    <div class="register-link">
-        <p>You already have an account? <a href="{% url 'login_user' %}">Login here</a>.</p>
+        <div class="register-link">
+            <p>You already have an account? <a href="{% url 'login_user' %}">Login here</a>.</p>
+        </div>
     </div>
-</div>
 
-</body>
-</html>
+{% endblock %}

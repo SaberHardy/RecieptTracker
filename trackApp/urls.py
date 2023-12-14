@@ -5,8 +5,8 @@ urlpatterns = [
     # path('', views.index, name='index'),
     path('', views.ListItems.as_view(), name='index'),
 
-    path('login/', views.login, name='login'),
-    path('register/', views.register, name='register'),
+    # path('login/', views.login, name='login'),
+    # path('register/', views.register, name='register'),
 
     # path('details/<int:id>/', views.details, name='details'),
     path('details/<int:pk>/', views.ReceiptDetail.as_view(), name='details'),
