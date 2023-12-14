@@ -34,4 +34,12 @@ E. Testing:
    * python -m venv venv
 4. activate the venv
    * .\venv\Scripts\activate
-5. 
+5. install requirements
+   * pip install -r requirements.txt
+### NOTE: the python version should be compatible with django
+
+6. migrate the database:
+   * python manage.py makemigrations
+   * python manage.py migrate
+7. Run the server
+   * python manage.py runserver
