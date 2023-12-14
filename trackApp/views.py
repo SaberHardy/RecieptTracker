@@ -35,11 +35,11 @@ class ListItems(ListView):
 
 
 def login(request):
-    return render(request, 'trackApp/login.html')
+    return render(request, 'trackApp/../templates/registration/registration/login.html')
 
 
 def register(request):
-    return render(request, 'trackApp/register.html')
+    return render(request, 'trackApp/../templates/registration/registration/register.html')
 
 
 # @login_required

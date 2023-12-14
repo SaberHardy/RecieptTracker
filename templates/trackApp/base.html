@@ -56,20 +56,30 @@
         <div class="login-logout">
             {% if user.is_authenticated %}
                 <i class="fas fa-user"></i>
-                <a href="{% url 'login' %}" class="nav-link">Logout</a>
+                <a href="{% url 'logout' %}" class="nav-link">Logout</a>
                 <span class="nav-link">|</span>
                 <a href="" class="nav-link">{{ user.username }}</a>
             {% else %}
                 <i class="fas fa-user"></i>
-                <a href="{% url 'login' %}" class="nav-link">login</a>
+                <a href="{% url 'login_user' %}" class="nav-link">login</a>
                 <span class="nav-link">|</span>
-                <a href="{% url 'register' %}" class="nav-link">Register</a>
+                <a href="{% url 'register_user' %}" class="nav-link">Register</a>
             {% endif %}
         </div>
     </div>
 </nav>
 
 <div class="content-div mx-5 my-5">
+    {% for message in messages %}
+        <div class="container-fluid p-0">
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="True">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        </div>
+    {% endfor %}
     {% block content %}
     {% endblock %}
 </div>
