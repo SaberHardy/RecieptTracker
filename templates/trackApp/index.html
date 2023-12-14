@@ -1,6 +1,6 @@
 {% extends 'trackApp/base.html' %}
 
-{% block content %}
+{% block content %}    
     <h2 class="text-center my-3">These are all your receipts</h2>
     <div class='row card-group'>
         {% for recipe in all_recipes %}
@@ -29,7 +29,11 @@
                         </a>
 
                         <p class="card-text">Total Amount: {{ recipe.calculate_total_amount }}DA</p>
-                        <p class="card-text float-right">{{ recipe.date_of_purchase }}</p>
+                        <div class="float-right">
+                        <p class="card-text">{{ recipe.date_of_purchase }}</p>
+                        <p class="card-text float-right">Created By: {{ recipe.user.id }}</p>
+
+                        </div>
                         <a href="{% url 'details' recipe.id %}" class="btn btn-primary">Check Details</a>
 
                         <a href="{% url 'update_receipt' recipe.pk %}" class="btn btn-success">

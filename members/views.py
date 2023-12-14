@@ -36,6 +36,7 @@ def register_user(request):
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, f"You are now logged in as {user.username}")
+            print(f"User ID: {user.id}, Username: {user.username}")
 
             return redirect("index")
         # else:
